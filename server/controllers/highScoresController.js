@@ -8,7 +8,13 @@ module.exports.create = function (req, res) {
 }
 
 module.exports.list = function (req, res) {
-  HighScore.find().limit(10).sort({round:-1, timestamp: -1}).exec(function (err, results) {
+  HighScore.find().limit(10).sort({round:-1, timestamp:-1}).exec(function (err, results) {
+    res.json(results);
+  });
+}
+
+module.exports.scoreToBeat = function(req, res){
+  HighScore.find().limit(10).sort({round:-1, timestamp:-1}).exec(function (err, results) {
     res.json(results);
   });
 }

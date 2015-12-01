@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var HighScore = require('../models/highScore');
-var LegendItem = require('../models/legendItem');
-var mongoose = require('mongoose');
+// var HighScore = require('../models/highScore');
+// var LegendItem = require('../models/legendItem');
+// var mongoose = require('mongoose');
 var highScoresController = require('../controllers/highScoresController');
 var legendController = require('../controllers/legendController');
 
@@ -12,6 +12,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/api/highScores', highScoresController.list);
+
+router.get('/api/highScores/scoreToBeat', highScoresController.scoreToBeat);
 
 router.post('/api/highScores', highScoresController.create);
 

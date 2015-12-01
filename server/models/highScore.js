@@ -4,5 +4,5 @@ module.exports = mongoose.model('HighScore', {
 	player: String,
 	level: Number,
 	round: Number,
-	//timestamp: timestamp
+	timestamp: {type: Date, default: Date.now}
 });

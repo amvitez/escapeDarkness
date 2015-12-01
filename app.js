@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var highScoresController = require('./server/controllers/highScoresController');
-var legendController = require('./server/controllers/legendController');
+// var highScoresController = require('./server/controllers/highScoresController');
+// var legendController = require('./server/controllers/legendController');
 
 var routes = require('./server/routes/index');
 

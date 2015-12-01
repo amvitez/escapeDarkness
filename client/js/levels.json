@@ -1,0 +1,26 @@
+[
+	{
+		"levelNumber": 1,
+		"title":"Ghost",
+		"lightsOnSoundID": "Thunder",
+		"enemySoundID": "Scream",
+		"lightsOnSound": "Thunder1.mp3",
+		"enemySound": "china.m4a",
+		"heroImages": {
+			"down": "ED_man-run_down.png",
+			"up": "ED_man-run_up.png",
+			"right": "ED_man-run_right.png",
+			"left": "ED_man-run_left.png"
+		},
+		"enemyImages": {
+			"down": "ED_ghost-red.png",
+			"up": "",
+			"right": "",
+			"left": ""
+		}
+	},
+	{
+		"levelNumber": 2,
+		"title":"Trump"
+	}
+]    
