@@ -8,14 +8,14 @@ var mongoose = require('mongoose');
 // var highScoresController = require('./server/controllers/highScoresController');
 // var legendController = require('./server/controllers/legendController');
 
-var routes = require('./server/routes/index');
+var routes = require('./dist/server/routes/index');
 
 var app = express();
 
 
 app.engine('html', require('ejs').renderFile);
 // view engine setup
-app.set('views', path.join(__dirname, '/client/views'));
+app.set('views', path.join(__dirname, '/dist/client/views'));
 app.set('view engine', 'html');
 
 if (app.get('env') !== 'development') {
@@ -28,8 +28,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('less-middleware')(path.join(__dirname, '/client')));
-app.use(express.static(path.join(__dirname, '/client')));
+app.use(require('less-middleware')(path.join(__dirname, '/dist/client')));
+app.use(express.static(path.join(__dirname, '/dist/client')));
 
 app.use('/', routes);
 

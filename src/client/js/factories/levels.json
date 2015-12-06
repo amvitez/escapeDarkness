@@ -1,0 +1,12 @@
+[
+	{
+		"levelNumber": 1,
+		"title":"Ghost",
+		"lightsOnSoundID": "Thunder",
+		"enemySoundID": "Scream",
+		"lightsOnSound": "Thunder1.mp3",
+		"enemySound": "china.m4a",
+		"heroImages": "heroTest2.png",
+		"enemyImages": "trump.png"
+	}
+]    

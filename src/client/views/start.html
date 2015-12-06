@@ -1,0 +1,30 @@
+<div class="start-menu row">
+  <div class="escape text-center"></div>
+  <div class="darkness"></div>
+  <div id="level-selector" class="carousel slide" data-interval="false" data-ride="carousel">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner center-block" role="listbox">
+      <div ng-repeat="level in startCtrl.levels" class="item" ng-class="{active: $first}">
+        <p class="text-center" data-level-number="{{level.levelNumber}}">{{level.title}}</p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a ng-if="startCtrl.levels.length > 1" class="left carousel-control" href="#level-selector" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a ng-if="startCtrl.levels.length > 1" class="right carousel-control" href="#level-selector" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div class="text-center">
+    <a ui-sref="game"><button ng-click="startCtrl.startLevel()" class="btn btn-large">Start</button></a>
+  </div>
+
+  <div>
+    <button><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=8YSSQ5XM3JHJ6&lc=US&item_name=Thank%20you%20for%20donating%21&item_number=Tony%20Vitez&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted" target="_blank">Donate</a></button>
+  </div>
+</div>

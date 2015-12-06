@@ -1,0 +1,30 @@
+[
+	{
+		"name": "speed",
+		"image":"ED_power-speed.png",
+		"sound": "ToneWobble.mp3",
+		"description": "Speed Boost",
+		"effect": "activateSpeedBoost()"
+	},
+	{
+		"name": "cloak",
+		"image":"ED_power-eye.png",
+		"sound": "ToneWobble.mp3",
+		"description": "Cloak of invisibility (press C to remove)",
+		"effect": "hero.visible = false;"
+	},
+	{
+		"name": "shield",
+		"image":"ED_power-shield.png",
+		"sound": "ToneWobble.mp3",
+		"description": "Invincible for 8 seconds",
+		"effect": "invincible = true;invincibleTimer = setInterval(function(){ invincible = false;clearInterval(invincibleTimer);},invincibilityTimeLimit);"
+	},
+	{
+		"name": "key",
+		"image":"key.png",
+		"sound": "ToneWobble.mp3",
+		"description": "Key to escape level",
+		"effect": "doorUnlocked = true;"
+	}
+]    

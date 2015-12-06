@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
-var sass = require('gulp-ruby-sass');
 var plumber = require('gulp-plumber');
 var imagemin = require('gulp-imagemin');
 var prefix = require('gulp-autoprefixer');
@@ -9,48 +8,71 @@ var concat = require('gulp-concat');
 
 // Scripts Task
 // Concats and Uglifies
-gulp.task('scripts', function(){
-	gulp.src(['pre-js/*.js', 'other path']);
-		.pipe(concat('all.js'))
-		.pipe(gulp.dest('js'));
+gulp.task('clientScripts', function(){
+	return gulp.src(['src/client/js/app.js',
+			  'src/client/js/factories/*.js',
+			  'src/client/js/controllers/*.js'])
+		.pipe(concat('scripts.js'))
+		.pipe(uglify({ mangle: false }))
+		.pipe(gulp.dest('dist/client/js'));
+});
 
-	gulp.src('js/*.js')
-		.pipe(plumber())
-		.pipe(uglify())
-		.pipe(gulp.dest('minjs'));
+gulp.task('json', function(){
+	return gulp.src(['src/client/js/*.json'])
+		.pipe(gulp.dest('dist/client/js'));
+});
+
+gulp.task('serverScripts', function(){
+	return gulp.src(['src/server/**/*'])
+		.pipe(uglify({ mangle: false }))
+		.pipe(gulp.dest('dist/server'));
+});
+
+gulp.task('views', function(){
+	return gulp.src(['src/client/views/*'])
+		.pipe(gulp.dest('dist/client/views'));
 });
 
 gulp.task('jshint', function(){
-	gulp.src('javascriptzz')
+	return gulp.src(['src/client/js/**/*.js','src/server/**/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });
 
 // Styles Task
-// Uglifies
 gulp.task('styles', function(){
-	gulp.src('styles/**/*.scss')
-		.pipe(plumber())
-		.pipe(sass({
-			style: 'compressed'
-		}))
-		.pipe(prefix('last 2 versions'))
-		.pipe(gulp.dest('css/'));
+	return gulp.src(['src/client/stylesheets/*.css'])
+		.pipe(gulp.dest('dist/client/stylesheets/'));
 });
 
 // Images Task
 // Compress
-gulp.task('image', function(){
-	gulp.src('img/*')
+gulp.task('images', function(){
+	gulp.src('src/client/images/*')
 		.pipe(imagemin())
-		.pipe(gulp.dest('build/img'));
+		.pipe(gulp.dest('dist/client/images'));
+});
+
+gulp.task('audio', function(){
+	gulp.src('src/client/audio/*')
+		.pipe(imagemin())
+		.pipe(gulp.dest('dist/client/audio'));
 });
 
 // Watch Task
 // Watches JS
 gulp.task('watch', function(){
-	gulp.watch('js/*.js', ['scripts']);
-	gulp.watch('scss/**/*.scss', ['styles']);
+	gulp.watch('src/client/js/**/*.js', ['clientScripts', 'jshint']);
+	gulp.watch('src/server/**/*.js', ['serverScripts', 'jshint']);
+	gulp.watch('src/client/views/*', ['views']);
+	gulp.watch('src/client/js/*.json', ['json']);
+	gulp.watch('src/client/stylesheets/*.css', ['styles']);
+	gulp.watch('src/client/images/*', ['images']);
+	gulp.watch('src/client/audio/*', ['audio']);
 });
 
-gulp.task('default', ['scripts', 'jshint', 'styles', 'image', 'watch']);
+gulp.task('default', ['jshint', 'clientScripts', 'serverScripts', 'json', 'styles', 'views', 'images', 'audio', 'watch']);
+
+
+
+

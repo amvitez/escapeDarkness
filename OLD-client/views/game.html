@@ -1,0 +1,111 @@
+<div id="game-container">
+  <div class="canvas-border">
+    <!-- <div class="door"></div> -->
+    <canvas id="canvas" width="1000" height="582"></canvas>
+  </div>
+  <button ng-click="gameCtrl.pause()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#legendModal">
+    ?
+  </button>
+  <button ng-click="gameCtrl.highScoresClick()" class="btn btn-primary" data-toggle="modal" data-target="#highScoresModal">
+    High Scores
+  </button>
+  <button ng-if="!gameCtrl.isPaused" ng-click="gameCtrl.pause()" class="btn btn-warning">
+    Pause
+  </button>
+  <button ng-if="gameCtrl.isPaused" ng-click="gameCtrl.resume()" class="btn btn-warning">
+    Resume
+  </button>
+  <button ng-click="gameCtrl.confirmQuit()" class="btn btn-warning" data-toggle="modal" data-target="#quitModal">
+    Quit
+  </button>
+  <div id="quitModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           Quit?
+        </div>
+        <div class="modal-body">
+          Do you really want to quit?
+        </div>
+        <div class="modal-footer">
+          <button ng-click="gameCtrl.quit()" class="btn btn-primary" data-dismiss="modal">Yes</button>
+          <button ng-click="gameCtrl.resume()" class="btn btn-primary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="legendModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           Legend
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li ng-repeat="item in gameCtrl.legendItems">
+              <img ng-src="../images/{{item.image}}">
+              <p>{{item.description}}</p>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button ng-click="gameCtrl.resume()" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div id="highScoreForm" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form ng-submit="gameCtrl.createHighScore()">
+            <div class="modal-header">
+               Congratulations on a High Score! Enter your name.
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Name" ng-model="gameCtrl.player" required></input>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit">OK</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="highScoresModal" class="modal fade" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+             High Scores
+          </div>
+          <div class="modal-body">
+            <ol>
+              <li ng-repeat="highScore in gameCtrl.highScores">
+                {{highScore.player}} {{highScore.round}}
+              </li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button ng-click="gameCtrl.resume()" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="gameOverModal" class="modal fade" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+             Game Over
+          </div>
+          <div class="modal-body">
+            You did not make it out alive.
+          </div>
+          <div class="modal-footer">
+            <button ng-click="gameCtrl.restart()" class="btn btn-primary" data-dismiss="modal">Play Again</button>
+            <a ui-sref="start"><button ng-click="gameCtrl.quit()" class="btn btn-primary" data-dismiss="modal">Quit</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
