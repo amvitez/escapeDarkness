@@ -1,8 +1,8 @@
 <div id="game-container">
-  <!-- <div class="canvas-border"> -->
+  <div class="canvas-border">
     <!-- <div class="door"></div> -->
-    <canvas id="canvas" width="1200" height="800"></canvas>
-  <!-- </div> -->
+    <canvas id="canvas" width="1025" height="578"></canvas>
+  </div>
   <div class="button-container">
     <button ng-click="gameCtrl.pause()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#legendModal">
       ?
@@ -40,9 +40,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-           Legend
+           Info
         </div>
         <div class="modal-body">
+          <p>Object of the game is to grab the key and get out of the courtyard before the enemies get you.
+          <p>Use W,A,S,D to move</p>
           <ul>
             <li ng-repeat="item in gameCtrl.legendItems">
               <img ng-src="../images/{{item.image}}">

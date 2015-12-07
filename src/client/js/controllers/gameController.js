@@ -10,8 +10,8 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	var sideWithDoor;
 	var doorPos, doorFrame1, doorFrame2;
 	var wallWidth = 10;
-	var canvasWidth = 1200;
-	var canvasHeight = 800;
+	var canvasWidth = 1025;
+	var canvasHeight = 578;
 	var hero;
 	var heroRadius = 10;
 	var heroMoveIncrement;
@@ -674,20 +674,20 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	        // case 38: moveUp(); break;
 	        // case 39: moveRight(); break;
 	        // case 40: moveDown(); break;
-	        case 75: moveLeft(); break;
-	        case 79: moveUp(); break;
-	        case 186: moveRight(); break;
-	        case 76: moveDown(); break;
+	        case 65: moveLeft(); break;
+	        case 87: moveUp(); break;
+	        case 68: moveRight(); break;
+	        case 83: moveDown(); break;
 	        case 67: invisible = false; hero.visible = true; break; //if user presses "c" they drop the cloak
 	    }
 	});
 
 	$(document).keyup(function(event){
 		switch (event.keyCode){
-			case 75: stopLeft(); break;
-			case 79: stopUp(); break;
-			case 186: stopRight(); break;
-			case 76: stopDown(); break;
+			case 65: stopLeft(); break;
+			case 87: stopUp(); break;
+			case 68: stopRight(); break;
+			case 83: stopDown(); break;
 		}
 	});
 }]);
