@@ -1,23 +1,25 @@
 <div id="game-container">
-  <div class="canvas-border">
+  <!-- <div class="canvas-border"> -->
     <!-- <div class="door"></div> -->
-    <canvas id="canvas" width="1000" height="582"></canvas>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+  <!-- </div> -->
+  <div class="button-container">
+    <button ng-click="gameCtrl.pause()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#legendModal">
+      ?
+    </button>
+    <button ng-click="gameCtrl.highScoresClick()" class="btn btn-primary" data-toggle="modal" data-target="#highScoresModal">
+      High Scores
+    </button>
+    <button ng-if="!gameCtrl.isPaused" ng-click="gameCtrl.pause()" class="btn btn-warning">
+      Pause
+    </button>
+    <button ng-if="gameCtrl.isPaused" ng-click="gameCtrl.resume()" class="btn btn-warning">
+      Resume
+    </button>
+    <button ng-click="gameCtrl.confirmQuit()" class="btn btn-warning" data-toggle="modal" data-target="#quitModal">
+      Quit
+    </button>
   </div>
-  <button ng-click="gameCtrl.pause()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#legendModal">
-    ?
-  </button>
-  <button ng-click="gameCtrl.highScoresClick()" class="btn btn-primary" data-toggle="modal" data-target="#highScoresModal">
-    High Scores
-  </button>
-  <button ng-if="!gameCtrl.isPaused" ng-click="gameCtrl.pause()" class="btn btn-warning">
-    Pause
-  </button>
-  <button ng-if="gameCtrl.isPaused" ng-click="gameCtrl.resume()" class="btn btn-warning">
-    Resume
-  </button>
-  <button ng-click="gameCtrl.confirmQuit()" class="btn btn-warning" data-toggle="modal" data-target="#quitModal">
-    Quit
-  </button>
   <div id="quitModal" class="modal fade" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">

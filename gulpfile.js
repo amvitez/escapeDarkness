@@ -5,6 +5,7 @@ var imagemin = require('gulp-imagemin');
 var prefix = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
+var less = require('gulp-less');
 
 // Scripts Task
 // Concats and Uglifies
@@ -41,20 +42,22 @@ gulp.task('jshint', function(){
 
 // Styles Task
 gulp.task('styles', function(){
-	return gulp.src(['src/client/stylesheets/*.css'])
+	return gulp.src(['src/client/stylesheets/style.less'])
+		.pipe(plumber())
+		.pipe(less())
 		.pipe(gulp.dest('dist/client/stylesheets/'));
 });
 
 // Images Task
 // Compress
 gulp.task('images', function(){
-	gulp.src('src/client/images/*')
+	return gulp.src('src/client/images/*')
 		.pipe(imagemin())
 		.pipe(gulp.dest('dist/client/images'));
 });
 
 gulp.task('audio', function(){
-	gulp.src('src/client/audio/*')
+	return gulp.src('src/client/audio/*')
 		.pipe(imagemin())
 		.pipe(gulp.dest('dist/client/audio'));
 });
@@ -66,7 +69,7 @@ gulp.task('watch', function(){
 	gulp.watch('src/server/**/*.js', ['serverScripts', 'jshint']);
 	gulp.watch('src/client/views/*', ['views']);
 	gulp.watch('src/client/js/*.json', ['json']);
-	gulp.watch('src/client/stylesheets/*.css', ['styles']);
+	gulp.watch('src/client/stylesheets/style.less', ['styles']);
 	gulp.watch('src/client/images/*', ['images']);
 	gulp.watch('src/client/audio/*', ['audio']);
 });

@@ -10,8 +10,8 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	var sideWithDoor;
 	var doorPos, doorFrame1, doorFrame2;
 	var wallWidth = 10;
-	var canvasWidth = 1000;
-	var canvasHeight = 582;
+	var canvasWidth = 1200;
+	var canvasHeight = 800;
 	var hero;
 	var heroRadius = 10;
 	var heroMoveIncrement;
