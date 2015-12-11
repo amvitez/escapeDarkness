@@ -1,5 +1,6 @@
 app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'highScoresFactory', function($state, levelFactory, powerupFactory, highScoresFactory){
 	var level = levelFactory.getLevel();
+	var roundNumber = 1;
 
 	var gameCtrl = this;
 	var stage;
@@ -13,10 +14,10 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	var canvasWidth = 1025;
 	var canvasHeight = 578;
 	var hero;
-	var heroRadius = 10;
+	var heroRadius = 22;
 	var heroMoveIncrement;
-	var enemyMoveIncrement = 10;
-	var wallBuffer = heroRadius*2;
+	var enemyMoveIncrement = 5;
+	var wallBuffer = heroRadius;
 	var lightsOn = true;
 	var enemies = new Map();
 	var lightTimer;
@@ -31,17 +32,18 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	var breathingRoom = 150;
 	var invisible = false;
 	var goggles = false;
-	var roundNumber = 1;
 	var highScore = 0;
 	var heroImg = new Image();
+	var enemyImg = new Image();
 	var leftHeld;
 	var rightHeld;
 	var upHeld;
 	var downHeld;
 	var keyDown = false;
 	var heroSpriteSheet;
+	var enemySpriteSheet;
 	var toggleLightsDuration = 2000;
-	var enemyMoveDuration = 300;
+	var enemyMoveDuration = 150;
 	var enemySoundBuffer = 100;
 
 	gameCtrl.legendItems = [];
@@ -108,12 +110,30 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 	function handleHeroLoad(e){
 		heroSpriteSheet = new createjs.SpriteSheet({
 		    images: [heroImg], 
-		    frames: {width: 64, height: 64, regX: 32, regY: 32}, 
+		    frames: {width: level.heroWidth, height: level.heroHeight, regX: level.heroWidth/2, regY: level.heroHeight/2}, 
 		    animations: {    
-		        walkRight: [0, 2, "walkRight"],
-		        walkLeft: [3, 5, "walkLeft"],
+		        walkRight: [0, 7, "walkRight"],
+		        walkLeft: [8, 15, "walkLeft"],
 		        walkUp: [0, 2, "walkUp"],
 		        walkDown: [0, 2, "walkDown"]
+		    }
+		});
+
+		enemyImg.onload = handleEnemyLoad;
+		enemyImg.src = "images/"+level.enemyImages;
+		
+	}
+
+	function handleEnemyLoad(e){
+		console.log(2);
+		enemySpriteSheet = new createjs.SpriteSheet({
+		    images: [enemyImg], 
+		    frames: {width: level.enemyWidth, height: level.enemyHeight, regX: level.enemyWidth/2, regY: level.enemyHeight/2}, 
+		    animations: {    
+		        walkRight: [0, 1, "walkRight"],
+		        walkLeft: [2, 3, "walkLeft"],
+		        walkUp: [6, 7, "walkUp"],
+		        walkDown: [4, 5, "walkDown"]
 		    }
 		});
 
@@ -323,9 +343,11 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 				enemyStart = randomLocation();
 			}
 
-			var enemy = new createjs.Bitmap(imgSource);
-			enemy.scaleX = 0.7;
-			enemy.scaleY = 0.7;
+			// var enemy = new createjs.Bitmap(imgSource);
+			// enemy.scaleX = 0.7;
+			// enemy.scaleY = 0.7;
+
+			var enemy = new createjs.Sprite(enemySpriteSheet);
 			//var enemy = new createjs.Shape();
 			//enemy.graphics.beginStroke("red").beginFill("red").drawCircle(0, 0, heroRadius);
 			enemy.x = enemyStart[0];
@@ -504,16 +526,20 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 				if(xDiff > yDiff){
 					if(hero.x > enemy.x){
 						enemy.x += enemyMoveIncrement;
+						enemy.gotoAndStop("walkRight");
 					}
 					else{
 						enemy.x -= enemyMoveIncrement;
+						enemy.gotoAndStop("walkLeft");
 					}
 				}
 				else{
 					if(hero.y > enemy.y){
 						enemy.y += enemyMoveIncrement;
+						enemy.gotoAndStop("walkDown");
 					}else{
 						enemy.y -= enemyMoveIncrement;
+						enemy.gotoAndStop("walkUp");
 					}
 				}
 
@@ -525,13 +551,21 @@ app.controller('gameController', ['$state', 'levelFactory', 'powerupFactory', 'h
 				var direction = Math.floor(Math.random() * 4);
 				switch(direction){
 					case(0):
-						enemy.x -= enemyMoveIncrement; break;
+						enemy.x -= enemyMoveIncrement; 
+						enemy.gotoAndStop("walkLeft");
+						break;
 					case(1):
-						enemy.x += enemyMoveIncrement; break;
+						enemy.x += enemyMoveIncrement; 
+						enemy.gotoAndStop("walkRight");
+						break;
 					case(2):
-						enemy.y -= enemyMoveIncrement; break;
+						enemy.y -= enemyMoveIncrement; 
+						enemy.gotoAndStop("walkUp");
+						break;
 					case(3):
-						enemy.y += enemyMoveIncrement; break;
+						enemy.y += enemyMoveIncrement; 
+						enemy.gotoAndStop("walkDown");
+						break;
 					default: break;
 				}
 			}

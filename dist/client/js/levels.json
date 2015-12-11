@@ -6,7 +6,11 @@
 		"enemySoundID": "Scream",
 		"lightsOnSound": "Thunder1.mp3",
 		"enemySound": "S-Damage.mp3",
-		"heroImages": "heroTest2.png",
-		"enemyImages": "ghost.png"
+		"heroImages": "heroTest3.png",
+		"enemyImages": "ghostTest.png",
+		"heroWidth": 44,
+		"heroHeight": 60,
+		"enemyWidth": 25,
+		"enemyHeight": 38 
 	}
 ]    
